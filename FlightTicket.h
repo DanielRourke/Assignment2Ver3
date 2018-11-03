@@ -1,30 +1,26 @@
-#pragma once
-
+/*
+ * FlightTicket.h
+ *
+ *  Created on: 03  Oct. 2018
+ *      Author: Daniel Rourke
+ */
 
 #include "Ticket.h"
 
+#ifndef FLIGHT_TICKET_H_
+#define FLIGHT_TICKET_H_
 
-enum direction  { SydneyToTokyo , TokyoToSydney };
-
-
-class FlightTicket :
-	public Ticket
+class FlightTicket :public Ticket
 {
 protected:
 	direction flightDirection;
 public:
-	FlightTicket();
 	FlightTicket(int, direction);
+	direction getDirection();
 	void printTicket();
-	virtual ~FlightTicket();
+	~FlightTicket();
 
 };
-
-
-
-FlightTicket::FlightTicket()
-{
-}
 
 FlightTicket::FlightTicket(int d, direction dir) : Ticket(d, 2000), flightDirection(dir)
 {
@@ -38,21 +34,30 @@ FlightTicket::FlightTicket(int d, direction dir) : Ticket(d, 2000), flightDirect
 	}
 }
 
+direction FlightTicket::getDirection()
+{
+	return flightDirection;
+}
+
 void FlightTicket::printTicket()
 {
 	cout << "Flight Ticket : " << date;
-	if (outBound)
+		
+	if (flightDirection == SydneyToTokyo)
 	{
-		cout << " Direction : OutBound ";
+		cout << " Direction : Sydney To Tokyo ";
 	}
-	else
+	else if (flightDirection == TokyoToSydney)
 	{
-		cout << " Direction : Inbound ";
+		cout << " Direction : Tokyo To Sydney ";
 	}
+
+
 	cout << "Price : " << getTicketPrice() << endl;
 }
-
 
 FlightTicket::~FlightTicket()
 {
 }
+
+#endif /* FLIGHT_TICKET_H_ */

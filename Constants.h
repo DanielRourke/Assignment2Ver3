@@ -8,6 +8,17 @@
 #ifndef CONSTANTS_H_
 #define CONSTANTS_H_
 
+#include <iostream>
+#include <string>
+#include <vector>
+#include <iomanip>
+#include <fstream>
+#include <sstream>
+#include <algorithm>
+#include <ctime>
+#include <cstdlib>
+
+using namespace std;
 
 const string nameMap[] = { "Opening", "Soccer 1", "Soccer 2", "Soccer 3",
 		"Track and Field 1", "Track and Field 2", "Track and Field 3",
@@ -20,9 +31,9 @@ const int eventDateMap[] = { 0, 3, 6, 9, 1, 2, 3, 4, 5, 6, 7, 8, 5, 7, 9 };
 
 const int eventQuota[] = {60, 47, 30, 22, 50, 52, 42, 25, 37, 20, 43, 34, 35, 30, 40};
 
-const int hotelPriceMap[] = {160, 210, 320};
+const int hotelPriceMap[] = {1000,1000, 1000, 160, 210, 320};
 
-const int hotelQuota[] ={20, 25, 30};// per day
+const int hotelQuota[] ={0, 0, 0, 20, 25, 30};// per day
 
 const int MAXEVENTS = 10;
 
@@ -31,5 +42,9 @@ const int MAXREQUESTS = 150;
 const int NUMBEROFEVENTS = 15;
 
 const int NUMBEROFDAYS = 10;
+
+const int NUMBEROFHOTELS = 5;
+
+enum direction { SydneyToTokyo, TokyoToSydney};
 
 #endif /* CONSTANTS_H_ */

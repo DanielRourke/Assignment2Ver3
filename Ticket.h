@@ -5,6 +5,8 @@
  *      Author: dongmo
  */
 
+#include "Constants.h"
+
 #ifndef TICKET_H_
 #define TICKET_H_
 
