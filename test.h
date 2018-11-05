@@ -5,19 +5,21 @@
  *      Author: Daniel Rourke
  */
 
-#include "ClientRequest.h"
-#include "FlightTicket.h"
-#include "HotelVoucher.h"
-#include "EventTicket.h"
-#include "RequestGenerator.h"
+
 
 #ifndef TEST_TRAVEL_AGENT_H_
 #define TEST_TRAVEL_AGENT_H_
 
 
+#include "ClientRequest.h"
+#include "FlightTicket.h"
+#include "HotelVoucher.h"
+#include "EventTicket.h"
+#include "RequestGenerator.h"
+#include "Pacakge.h"
 struct Test
 {
-    void test();
+    void test(); 
 };
 
 void Test::test()
@@ -41,7 +43,13 @@ void Test::test()
 
     RequestGenerator bob;
 
-
+    Package p1(7, 9);
+	p1.addHotel(7, 5, 1);
+	p1.addHotel(8, 5, 1);
+	p1.addEvent(14);
+	ClientRequest client2("12020 5 14", 2);
+	error code = p1.isValid(&client2);
+	p1.printPackage(code, -3);
 }
 #endif /* TEST_H_  */
 

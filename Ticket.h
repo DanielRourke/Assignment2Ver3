@@ -39,7 +39,7 @@ public:
     }
 
 	bool operator<(Ticket* otherdate) const {
-		return this->date < otherdate.date;
+		return this->date < otherdate->date;
     }
 
 	bool operator<(int otherdate) const  {
@@ -51,7 +51,7 @@ public:
 	}
 
 	bool operator>(Ticket* otherdate) const {
-		return this->date > otherdate.date;
+		return this->date > otherdate->date;
     }
 
 	bool operator>(int otherdate) const  {

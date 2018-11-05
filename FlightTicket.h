@@ -5,10 +5,12 @@
  *      Author: Daniel Rourke
  */
 
-#include "Ticket.h"
+
 
 #ifndef FLIGHT_TICKET_H_
 #define FLIGHT_TICKET_H_
+
+#include "Ticket.h"
 
 class FlightTicket :public Ticket
 {

@@ -4,21 +4,23 @@
  *  Created on: 4 Oct. 2018
  *      Author: Daniel Rourke
  */
+
+
+#ifndef PACKAGE_H_
+#define PACKAGE_H_
+
 #include "ClientRequest.h"
 #include "FlightTicket.h"
 #include "HotelVoucher.h"
 #include "EventTicket.h"
-
-#ifndef PACKAGE_H_
-#define PACKAGE_H_
 
 class Package
 {
 protected:
     FlightTicket* outBound;
     FlightTicket* inBound;
-    vector <EventTicket*> eventList;
-    vector <HotelVoucher*> hotelList;
+    vector <EventTicket> eventList;
+    vector <HotelVoucher> hotelList;
     double currentCost;
 public:
     Package();
@@ -48,25 +50,25 @@ Package::~Package()
 {
     delete outBound;
     delete inBound;
-    for (int i = 0 ; i < eventList.size(); i++)
-    {
-        delete eventList[i];
-    }
-    for (int i = 0 ; i < hotelList.size(); i++)
-    {
-        delete hotelList[i];
-    }
+    // for (int i = 0 ; i < eventList.size(); i++)
+    // {
+    //     delete eventList[i];
+    // }
+    // for (int i = 0 ; i < hotelList.size(); i++)
+    // {
+    //     delete hotelList[i];
+    // }
 }
 
 void Package::addEvent(int eventID)
 {
-    eventList.push_back(new EventTicket(eventID)); 
+    eventList.push_back(EventTicket(eventID)); 
     currentCost += eventPriceMap[eventID];
 }
 
 void Package::addHotel(int date, int star, double vacancy)
 {
-    hotelList.push_back(new HotelVoucher(date, star, vacancy)); 
+    hotelList.push_back(HotelVoucher(date, star, vacancy)); 
     currentCost += hotelPriceMap[star];
 }
 
@@ -99,14 +101,30 @@ error Package::isValid(ClientRequest* request)
     // o All the event tickets should be in the dates between fly-in and fly-out (can be in the
     // same day of arrival or departure).
     // o Only the events a client requests can be included in the travel package to the client.
-    for (int i = 0; i < eventList.size(); i++)
+    // for (int i = 0; i < eventList.size(); i++)
+    // {
+    //     if( *eventList[i] < outBound || *eventList[i] > inBound )
+    //     {   
+    //         return INVALID_EVENT_DATE;
+    //     }
+
+    //     if (!request->events[eventList[i]->getEventId() ] )
+    //     {
+    //         return INVALID_EVENT_NOT_REQUESTED;
+    //     }
+
+
+    // }
+
+    vector<EventTicket>::iterator event;
+    for (event = eventList.begin() ; event != eventList.end(); event++)
     {
-        if( *eventList[i] < outBound || *eventList[i] > inBound )
+        if( *event < outBound || *event > inBound )
         {   
             return INVALID_EVENT_DATE;
         }
 
-        if (!request->events[eventList[i]->getEventId() ] )
+        if (!request->events[event->getEventId() ] )
         {
             return INVALID_EVENT_NOT_REQUESTED;
         }
@@ -114,10 +132,21 @@ error Package::isValid(ClientRequest* request)
 
     }
 
-    //One event one ticket.
-    for (int i = 0; i < eventList.size() - 1; i++)
+        
+
+    // //One event one ticket.
+    // for (int i = 0; i < eventList.size() - 1; i++)
+    // {
+    //     if (eventList[i]->getEventId() == eventList[i + 1]->getEventId())
+    //     {
+    //         return INVALID_EVENT_DUPLICATE;
+    //     }
+    // }
+
+    //One event one ticket
+    for (event = eventList.begin() + 1 ; event != eventList.end(); event++ )
     {
-        if (eventList[i]->getEventId() == eventList[i + 1]->getEventId())
+        if (event->getEventId() == (event - 1)->getEventId())
         {
             return INVALID_EVENT_DUPLICATE;
         }
@@ -133,19 +162,30 @@ error Package::isValid(ClientRequest* request)
     {
         return INVALID_HOTEL_STAYS;
     }
-    else if(*hotelList.front() < outBound )
+    else if(hotelList.front() < outBound )
     {
         return INVALID_HOTEL_STAYS;
     }
-    else if(*hotelList.back() > inBound )
+    else if(hotelList.back() > inBound )
     {
         return INVALID_HOTEL_STAYS;
     }
 
+    // // o The hotel types should be the same or above the client’s desired hotel type.
+    // for (int i = 0 ; i < hotelList.size(); i++ )
+    // {
+    //     if( !(hotelList[i]->getHotelType() >= request->hotelType ))
+    //     {
+    //         return INVALID_HOTEL_RATING;
+    //     }
+    // }
+
+
     // o The hotel types should be the same or above the client’s desired hotel type.
-    for (int i = 0 ; i < hotelList.size(); i++ )
+   // vector<HotelVoucher>:: iterator hotel;
+    for (HotelVoucher hotel : hotelList )
     {
-        if( !(hotelList[i]->getHotelType() >= request->hotelType ))
+        if( !(hotel.getHotelType() >= request->hotelType ))
         {
             return INVALID_HOTEL_RATING;
         }
@@ -226,12 +266,12 @@ void Package::printPackageDetails()
     inBound->printTicket();
     for (int i = 0; i < eventList.size(); i++)
     {
-        eventList[i]->printTicket();
+        eventList[i].printTicket();
     }
 
     for (int i = 0 ; i < hotelList.size(); i++)
     {
-        hotelList[i]->printTicket();
+        hotelList[i].printTicket();
     }
     cout << "Total Cost : " <<  currentCost << endl;
 }

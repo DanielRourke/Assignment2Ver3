@@ -10,9 +10,9 @@
 #ifndef CLIENTREQUEST_H_
 #define CLIENTREQUEST_H_
 
-class ClientRequest {
+class ClientRequest 
+{
 public:
-	public:
 	int clientId;
 	int hotelType;
 	bool events[NUMBEROFEVENTS];
@@ -33,8 +33,9 @@ ClientRequest::ClientRequest()
 		events[i] = false;
 }
 
-ClientRequest::ClientRequest(string s, int id) : clientId(id)
+ClientRequest::ClientRequest(string s, int id)
 {
+	clientId = id;
 	int next;
 	stringstream ss;
 	ss.str(s);
