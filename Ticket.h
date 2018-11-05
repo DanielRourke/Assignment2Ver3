@@ -33,6 +33,31 @@ public:
 
 	virtual ~Ticket() {
 	}
+	
+	bool operator<(const Ticket &otherdate) const {
+		return this->date < otherdate.date;
+    }
+
+	bool operator<(Ticket* otherdate) const {
+		return this->date < otherdate.date;
+    }
+
+	bool operator<(int otherdate) const  {
+		return this->date < otherdate;
+	}
+	
+	bool operator>(const Ticket &otherdate) const {
+		  return this->date > otherdate.date;
+	}
+
+	bool operator>(Ticket* otherdate) const {
+		return this->date > otherdate.date;
+    }
+
+	bool operator>(int otherdate) const  {
+			return this->date > otherdate;
+	}
+
 };
 
 #endif /* TICKET_H_ */

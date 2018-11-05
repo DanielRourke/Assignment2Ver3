@@ -17,6 +17,7 @@
 #include <algorithm>
 #include <ctime>
 #include <cstdlib>
+#include <set>
 
 using namespace std;
 
@@ -46,5 +47,9 @@ const int NUMBEROFDAYS = 10;
 const int NUMBEROFHOTELS = 5;
 
 enum direction { SydneyToTokyo, TokyoToSydney};
+
+enum error { VALID, INVALID_COST, INVALID_FLIGHTS, INVALID_NO_EVENTS, INVALID_EVENT_DATE,
+             INVALID_EVENT_NOT_REQUESTED, INVALID_HOTEL_STAYS, INVALID_HOTEL_RATING,
+			 INVALID_EVENT_DUPLICATE }
 
 #endif /* CONSTANTS_H_ */

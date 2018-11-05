@@ -9,6 +9,7 @@
 #include "FlightTicket.h"
 #include "HotelVoucher.h"
 #include "EventTicket.h"
+#include "RequestGenerator.h"
 
 #ifndef TEST_TRAVEL_AGENT_H_
 #define TEST_TRAVEL_AGENT_H_
@@ -34,9 +35,12 @@ void Test::test()
     HotelVoucher room2(4, 5 , 0.5);
     HotelVoucher room3(4, 5 , 1.0);
 
-    room1.printTicket();
+    room1.printTicket(); 
     room2.printTicket();
     room3.printTicket();
+
+    RequestGenerator bob;
+
 
 }
 #endif /* TEST_H_  */
