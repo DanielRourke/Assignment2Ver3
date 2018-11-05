@@ -96,26 +96,9 @@ error Package::isValid(ClientRequest* request)
         return INVALID_NO_EVENTS;
     }
 
-
-
     // o All the event tickets should be in the dates between fly-in and fly-out (can be in the
     // same day of arrival or departure).
     // o Only the events a client requests can be included in the travel package to the client.
-    // for (int i = 0; i < eventList.size(); i++)
-    // {
-    //     if( *eventList[i] < outBound || *eventList[i] > inBound )
-    //     {   
-    //         return INVALID_EVENT_DATE;
-    //     }
-
-    //     if (!request->events[eventList[i]->getEventId() ] )
-    //     {
-    //         return INVALID_EVENT_NOT_REQUESTED;
-    //     }
-
-
-    // }
-
     vector<EventTicket>::iterator event;
     for (event = eventList.begin() ; event != eventList.end(); event++)
     {
@@ -128,20 +111,7 @@ error Package::isValid(ClientRequest* request)
         {
             return INVALID_EVENT_NOT_REQUESTED;
         }
-
-
     }
-
-        
-
-    // //One event one ticket.
-    // for (int i = 0; i < eventList.size() - 1; i++)
-    // {
-    //     if (eventList[i]->getEventId() == eventList[i + 1]->getEventId())
-    //     {
-    //         return INVALID_EVENT_DUPLICATE;
-    //     }
-    // }
 
     //One event one ticket
     for (event = eventList.begin() + 1 ; event != eventList.end(); event++ )
@@ -170,16 +140,6 @@ error Package::isValid(ClientRequest* request)
     {
         return INVALID_HOTEL_STAYS;
     }
-
-    // // o The hotel types should be the same or above the client’s desired hotel type.
-    // for (int i = 0 ; i < hotelList.size(); i++ )
-    // {
-    //     if( !(hotelList[i]->getHotelType() >= request->hotelType ))
-    //     {
-    //         return INVALID_HOTEL_RATING;
-    //     }
-    // }
-
 
     // o The hotel types should be the same or above the client’s desired hotel type.
    // vector<HotelVoucher>:: iterator hotel;

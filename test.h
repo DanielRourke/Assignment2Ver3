@@ -5,8 +5,6 @@
  *      Author: Daniel Rourke
  */
 
-
-
 #ifndef TEST_TRAVEL_AGENT_H_
 #define TEST_TRAVEL_AGENT_H_
 

@@ -15,6 +15,7 @@ int main()
 {
     Test test1;
     test1.test();
+    system("Pause");
 
     return 0;
 }
