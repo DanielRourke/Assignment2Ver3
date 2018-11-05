@@ -14,7 +14,7 @@
 #include "HotelVoucher.h"
 #include "EventTicket.h"
 #include "RequestGenerator.h"
-#include "Pacakge.h"
+#include "Package.h"
 struct Test
 {
     void test(); 

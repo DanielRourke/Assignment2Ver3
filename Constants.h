@@ -18,6 +18,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <set>
+#include <numeric>
 
 using namespace std;
 

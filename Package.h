@@ -21,55 +21,71 @@ protected:
     FlightTicket* inBound;
     vector <EventTicket> eventList;
     vector <HotelVoucher> hotelList;
-    double currentCost;
 public:
-    Package();
+    Package() {}
     Package(int , int);
     ~Package();
     void addEvent(int);
     void addHotel(int, int, double);
     error isValid(ClientRequest*);
+    int getEventsCost();
+    int getHotelsCost();
+    int getFlightsCost();
+    double getTotalCost();
     void printPackage(error, int);
     void printError(error);
     void printPackageDetails();
 };
 
-Package::Package() : currentCost(0.0)
-{
 
-}
-
-Package::Package(int out, int in) : currentCost(0.0)
+Package::Package(int out, int in)
 {
     outBound = new FlightTicket(out, SydneyToTokyo);
     inBound = new FlightTicket(in, TokyoToSydney);
-    currentCost = outBound->getTicketPrice() + inBound->getTicketPrice();
 }
 
 Package::~Package()
 {
     delete outBound;
     delete inBound;
-    // for (int i = 0 ; i < eventList.size(); i++)
-    // {
-    //     delete eventList[i];
-    // }
-    // for (int i = 0 ; i < hotelList.size(); i++)
-    // {
-    //     delete hotelList[i];
-    // }
 }
 
 void Package::addEvent(int eventID)
 {
     eventList.push_back(EventTicket(eventID)); 
-    currentCost += eventPriceMap[eventID];
 }
 
 void Package::addHotel(int date, int star, double vacancy)
 {
     hotelList.push_back(HotelVoucher(date, star, vacancy)); 
-    currentCost += hotelPriceMap[star];
+}
+
+int Package::getEventsCost()
+{
+    return accumulate(eventList.begin(), eventList.end(), 0,
+            [](int currentCost, EventTicket& event)
+            {
+                return currentCost + event.getTicketPrice();
+            });
+}
+
+int Package::getHotelsCost()
+{
+    return accumulate(hotelList.begin(), hotelList.end(), 0,
+            [](int currentCost, HotelVoucher& hotel)
+            {
+                return currentCost + hotel.getTicketPrice();
+            });
+}
+
+int Package::getFlightsCost()
+{
+    return outBound->getTicketPrice() + inBound->getTicketPrice();
+}
+
+double Package::getTotalCost()
+{
+    return getEventsCost() + getHotelsCost() + getFlightsCost();
 }
 
 error Package::isValid(ClientRequest* request)
@@ -79,13 +95,13 @@ error Package::isValid(ClientRequest* request)
 
 
     // o The total costs should not exceed client’s budget. 
-    if (currentCost > request->budget)
+    if (getTotalCost() > request->budget)
     {
         return INVALID_COST;
     }
 
     // o The date of fly-in ticket is earlier than the date of fly-out ticket.
-    if (inBound < outBound || *outBound < 0 || *inBound > 9)
+    if (inBound < outBound || *outBound < 0 || *inBound > NUMBEROFDAYS )
     {
         return INVALID_FLIGHTS;
     }
@@ -233,7 +249,7 @@ void Package::printPackageDetails()
     {
         hotelList[i].printTicket();
     }
-    cout << "Total Cost : " <<  currentCost << endl;
+    cout << "Total Cost : " <<  getTotalCost() << endl;
 }
 
 #endif /* PACKAGE_H_ */

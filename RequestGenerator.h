@@ -35,7 +35,7 @@ public:
 	
 };
 
-void RequestGenerator::generateRequest(int min = 100, int max = 150)
+void RequestGenerator::generateRequest(int min = 100, int max = MAXREQUESTS)
 {
 
 	//output the date to a file
@@ -54,7 +54,7 @@ void RequestGenerator::generateRequest(int min = 100, int max = 150)
 	
 	for (int i = 0; i < requestCount; i++)
 	{
-		int eventCount = rand() % 10 + 1;
+		int eventCount = rand() % MAXEVENTS+ 1;
 
 		for (int j = 0; j < eventCount; j++)
 		{
