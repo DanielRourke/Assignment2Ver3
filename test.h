@@ -15,6 +15,7 @@
 #include "EventTicket.h"
 #include "RequestGenerator.h"
 #include "Package.h"
+#include "TravelAgent.h"
 struct Test
 {
     void test(); 
@@ -45,9 +46,16 @@ void Test::test()
 	p1.addHotel(7, 5, 1);
 	p1.addHotel(8, 5, 1);
 	p1.addEvent(14);
-	ClientRequest client2("12020 5 14", 2);
+    p1.addEvent(5);
+	ClientRequest client2("12020 5 14 5", 2);
 	error code = p1.isValid(&client2);
 	p1.printPackage(code, -3);
+
+
+    TravelAgent Jerry;
+    Jerry.proccessRequests();
+    Jerry.createPackages();
+
 }
 #endif /* TEST_H_  */
 

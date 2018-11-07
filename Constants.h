@@ -22,9 +22,7 @@
 
 using namespace std;
 
-const string nameMap[] = { "Opening", "Soccer 1", "Soccer 2", "Soccer 3",
-		"Track and Field 1", "Track and Field 2", "Track and Field 3",
-		"Track and Field 4", "Swimming 1", "Swimming 2", "Gymnastics 1",
+const string nameMap[] = { "Opening", "Soccer 1", "Soccer 2", "Soccer 3","Track and Field 1", "Track and Field 2", "Track and Field 3","Track and Field 4", "Swimming 1", "Swimming 2", "Gymnastics 1",
 		"Gymnastics 2", "Basketball 1", "Basketball 2", "Closing" };
 const int eventPriceMap[] = { 2000, 80, 160, 500, 80, 100, 120, 140, 100, 100, 60, 100,
 		150, 300, 800 };

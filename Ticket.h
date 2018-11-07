@@ -24,6 +24,11 @@ public:
 	int getDate() {
 		return date;
 	}
+	
+	void setDate(int day) {
+		this->date = day;
+	}
+
 
 	double getTicketPrice() {
 		return (1.0-discount) * fullPrice;

@@ -21,6 +21,7 @@ public:
 	ClientRequest(string, int);
     int earliestEventDate();
 	int latestEventDate();
+	int getHotelType();
 	void printRequest();
 };
 
@@ -67,6 +68,11 @@ int ClientRequest::latestEventDate()
 				flyin = eventDateMap[i];
 	}
 		return flyin;
+}
+
+int ClientRequest::getHotelType()
+{
+	return hotelType;
 }
 
 void ClientRequest::printRequest() 

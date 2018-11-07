@@ -8,28 +8,38 @@
 #define EVENT_TICKET_H_
 
 #include "Ticket.h"
+#include "Constants.h"
 
 
 class EventTicket : public Ticket
 {
-
 protected:
     string eventName;
     int eventId;
 public:
 	EventTicket(int);
-	~EventTicket() {}
+	~EventTicket();
     int getEventId();
+    int getQuota();
     string getName();
     bool operator ==( const EventTicket& otherEvent );
     void printTicket();
 };
 
 EventTicket::EventTicket(int id) : 
-Ticket(eventDateMap[id],eventPriceMap[id]), 
-eventId(id),
-eventName(nameMap[id])
-{}
+Ticket(eventDateMap[id],eventPriceMap[id])
+{
+    //had compliler issue
+   
+    this->eventName = nameMap[id]; 
+    this->eventId = id;
+
+}
+
+EventTicket::~EventTicket()
+{
+    
+}
 
 int EventTicket::getEventId()
 {

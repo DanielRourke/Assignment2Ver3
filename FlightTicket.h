@@ -6,7 +6,6 @@
  */
 
 
-
 #ifndef FLIGHT_TICKET_H_
 #define FLIGHT_TICKET_H_
 
@@ -19,6 +18,8 @@ protected:
 public:
 	FlightTicket(int, direction);
 	direction getDirection();
+	direction setDirection(direction);
+	void setFlight(int);
 	void printTicket();
 	~FlightTicket();
 
@@ -39,6 +40,16 @@ FlightTicket::FlightTicket(int d, direction dir) : Ticket(d, 2000), flightDirect
 direction FlightTicket::getDirection()
 {
 	return flightDirection;
+}
+
+direction FlightTicket::setDirection(direction flightDirection)
+{
+	 this->flightDirection = flightDirection;
+}
+
+void FlightTicket::setFlight(int day)
+{
+	this->date = day;
 }
 
 void FlightTicket::printTicket()

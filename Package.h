@@ -27,6 +27,7 @@ public:
     ~Package();
     void addEvent(int);
     void addHotel(int, int, double);
+    void changeFlight(int, direction);
     error isValid(ClientRequest*);
     int getEventsCost();
     int getHotelsCost();
@@ -38,7 +39,7 @@ public:
 };
 
 
-Package::Package(int out, int in)
+Package::Package(int out = 0, int in = 9)
 {
     outBound = new FlightTicket(out, SydneyToTokyo);
     inBound = new FlightTicket(in, TokyoToSydney);
@@ -58,6 +59,18 @@ void Package::addEvent(int eventID)
 void Package::addHotel(int date, int star, double vacancy)
 {
     hotelList.push_back(HotelVoucher(date, star, vacancy)); 
+}
+
+void Package::changeFlight(int day, direction flightDirection)
+{
+    if (flightDirection == SydneyToTokyo)
+	{
+        outBound->setFlight(day);
+	}
+	else if (flightDirection == TokyoToSydney)
+	{
+		inBound->setFlight(day);
+	}
 }
 
 int Package::getEventsCost()
@@ -85,7 +98,9 @@ int Package::getFlightsCost()
 
 double Package::getTotalCost()
 {
-    return getEventsCost() + getHotelsCost() + getFlightsCost();
+    return getEventsCost() + 
+           getHotelsCost() + 
+           getFlightsCost();
 }
 
 error Package::isValid(ClientRequest* request)
